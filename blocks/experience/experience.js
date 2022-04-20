@@ -7,7 +7,6 @@ import { isPlatformSupported, isDesktop, createCTAButton, fetchPlaceholders, get
  */
 export default async function decorate(block) {
   const params = getUrlParams();
-
   const placeholders = await fetchPlaceholders();
 
   const title = block.querySelector('#experience-title');
@@ -17,6 +16,9 @@ export default async function decorate(block) {
 
   const createdBy = block.querySelector('#created-by');
   createdBy.textContent = `${placeholders['created-by']}: ${params.user ?? 'Unknown'}`;
+
+  const previewImage = createOptimizedPicture(params.preview, 'experience preview', true, ['experience-preview']);
+  document.body.querySelector('main').prepend(previewImage);
 
   const aeroIcon = createOptimizedPicture('/media_1cde345258ec2322aa4689fa9d44fa0fe0f0f646c.png', 'aero icon', false, 'aero-icon');
 

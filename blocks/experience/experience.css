@@ -63,6 +63,14 @@ main .experience-container {
   padding-bottom: 100px;
 }
 
+.experience-preview img {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: -1;
+}
+
 @media (min-width: 600px) {
   .unsupported-platform .experience {
     padding-top: 60px;
