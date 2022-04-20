@@ -1,5 +1,5 @@
 
-import { isPlatformSupported, isDesktop, createCTAButton, fetchPlaceholders, getUrlParams } from '../../scripts/scripts.js';
+import { isPlatformSupported, isDesktop, createCTAButton, fetchPlaceholders, getUrlParams, createOptimizedPicture } from '../../scripts/scripts.js';
 
 /**
  * decorates the experience block
@@ -18,9 +18,7 @@ export default async function decorate(block) {
   const createdBy = block.querySelector('#created-by');
   createdBy.textContent = `${placeholders['created-by']}: ${params.user ?? 'Unknown'}`;
 
-  const aeroIcon = document.createElement('img');
-  aeroIcon.classList.add('aero-icon');
-  aeroIcon.src = '/media_1cde345258ec2322aa4689fa9d44fa0fe0f0f646c.png';
+  const aeroIcon = createOptimizedPicture('/media_1cde345258ec2322aa4689fa9d44fa0fe0f0f646c.png', 'aero icon', false, 'aero-icon');
 
   if (isPlatformSupported()) {
     block.insertBefore(aeroIcon, block.firstChild);
@@ -50,8 +48,7 @@ export default async function decorate(block) {
       const qrCode = document.createElement('div');
       qrCode.classList.add('qr-code-container');
 
-      const qrCodeImg = document.createElement('img');
-      qrCodeImg.src = `/${params.qr}`;
+      const qrCodeImg = createOptimizedPicture(`/${params.qr}`, 'qr code', false, 'aero-icon');
 
       const qrLabel = document.createElement('div');
       qrLabel.classList.add('qr-label');
