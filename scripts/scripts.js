@@ -660,6 +660,16 @@ export function createCTAButton(label, large = false, quiet = false) {
   return button
 }
 
+export function getUrlParams() {
+  if (!window.params) {
+    window.params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+  }
+
+  return window.params;
+}
+
 export function getLocale() {
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
@@ -673,7 +683,6 @@ export async function fetchPlaceholders() {
     let json;
     try {
       const locale = getLocale();
-      const urlPrefix = locale === 'en-us' ? '' : `/${locale}`;
       const resp = await fetch(`/locale/${locale}.json`);
       json = await resp.json();
     } catch {

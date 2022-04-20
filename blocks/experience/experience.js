@@ -1,24 +1,22 @@
 
-import { isPlatformSupported, isDesktop, createCTAButton, fetchPlaceholders } from '../../scripts/scripts.js';
+import { isPlatformSupported, isDesktop, createCTAButton, fetchPlaceholders, getUrlParams } from '../../scripts/scripts.js';
 
 /**
  * decorates the experience block
  * @param {Element} block The experience block element
  */
 export default async function decorate(block) {
-  const params = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
+  const params = getUrlParams();
 
   const placeholders = await fetchPlaceholders();
 
   const title = block.querySelector('#experience-title');
-  document.title = title.innerHTML = params.title ?? 'Untitled';
+  document.title = title.textContent = params.title ?? 'Untitled';
 
   title.parentNode.classList.add('experience-title-container');
 
   const createdBy = block.querySelector('#created-by');
-  createdBy.innerHTML = `${placeholders['created-by']}: ${params.user ?? 'Unknown'}`;
+  createdBy.textContent = `${placeholders['created-by']}: ${params.user ?? 'Unknown'}`;
 
   const aeroIcon = document.createElement('img');
   aeroIcon.classList.add('aero-icon');
@@ -31,7 +29,7 @@ export default async function decorate(block) {
     launchCTAContainer.classList.add('launch-cta');
 
     const launchCTALabel = document.createElement('div');
-    launchCTALabel.innerHTML = placeholders['already-have-aero'];
+    launchCTALabel.textContent = placeholders['already-have-aero'];
     launchCTAContainer.append(launchCTALabel);
 
     const launchButton = createCTAButton(placeholders['open-in-aero'], false, true);
@@ -42,7 +40,7 @@ export default async function decorate(block) {
     if (isDesktop()) {
       const unsupportedNoticeContainer = document.createElement('div');
       unsupportedNoticeContainer.classList.add('unsupported-notice');
-      unsupportedNoticeContainer.innerHTML = placeholders['unsupported-notice'];
+      unsupportedNoticeContainer.textContent = placeholders['unsupported-notice'];
 
       const learnCTA = createCTAButton(placeholders['learn-more'], true, false);
       unsupportedNoticeContainer.append(learnCTA);
@@ -57,7 +55,7 @@ export default async function decorate(block) {
 
       const qrLabel = document.createElement('div');
       qrLabel.classList.add('qr-label');
-      qrLabel.innerHTML = placeholders['scan-to-view'];
+      qrLabel.textContent = placeholders['scan-to-view'];
 
       qrCode.appendChild(qrCodeImg);
       qrCode.appendChild(qrLabel);
