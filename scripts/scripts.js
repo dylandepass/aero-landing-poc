@@ -679,7 +679,7 @@ export function getLocale() {
     get: (searchParams, prop) => searchParams.get(prop),
   });
 
-  return params.locale ?? 'en-us';
+  return params.locale ?? 'en';
 }
 
 export async function fetchPlaceholders() {
