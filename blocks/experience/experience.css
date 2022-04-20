@@ -32,6 +32,10 @@ main .experience-container {
   margin-top: 0px;
 }
 
+.experience-wrapper .qr-code-container {
+  margin-bottom: 40px;
+}
+
 .experience-wrapper .qr-code-container img {
   width: 174px;
 }
@@ -55,10 +59,13 @@ main .experience-container {
   gap: 16px;
 }
 
+.aero-icon {
+  padding-bottom: 100px;
+}
+
 @media (min-width: 600px) {
   .unsupported-platform .experience {
     padding-top: 60px;
-    padding-bottom: 128px;
   }
 
   .unsupported-platform h1 {

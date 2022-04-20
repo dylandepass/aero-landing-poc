@@ -74,6 +74,7 @@ body {
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
+  overflow: hidden;
   display: none;
 }
 
@@ -96,6 +97,7 @@ main {
   display: flex;
   align-items: stretch;
   flex-direction: row;
+  overflow-y: scroll;
 }
 
 h1, h2, h3,
