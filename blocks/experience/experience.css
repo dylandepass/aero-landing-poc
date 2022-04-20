@@ -1,0 +1,76 @@
+main .experience-container {
+  width: 100%;
+  padding-top: 42px;
+  padding-bottom: 77px;
+}
+
+.experience-wrapper {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.experience-wrapper .experience {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.experience-wrapper h1 {
+  font-size: var(--heading-font-size-l);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.experience-wrapper h3 {
+  font-size: var(--heading-font-size-xxs);
+  font-style: italic;
+  font-weight: 300;
+  margin-top: 0px;
+}
+
+.experience-wrapper .qr-code-container img {
+  width: 174px;
+}
+
+.experience-wrapper .qr-code-container .qr-label {
+  font-size: var(--body-font-size-s);
+}
+
+.experience-wrapper .aero-icon {
+  width: 130px;
+}
+
+.launch-cta div {
+  font-size: var(--body-font-size-s);
+  margin-bottom: 5px;
+}
+.unsupported-notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .unsupported-platform .experience {
+    padding-top: 60px;
+    padding-bottom: 128px;
+  }
+
+  .unsupported-platform h1 {
+    font-size: var(--heading-font-size-xl);
+  }
+
+  .unsupported-platform h3 {
+    padding-bottom: 60px;
+    font-size: var(--heading-font-size-m);
+  }
+
+  .experience-wrapper .aero-icon {
+    width: 180px;
+  }
+}
