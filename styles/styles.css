@@ -57,6 +57,11 @@
 
 }
 
+html, body {
+  height: 100%;
+}
+
+
 html {
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
@@ -78,10 +83,13 @@ body.appear {
 
 header {
   height: 64px;
+  position: fixed;
+  left: 0;
+  right: 0;
 }
 
 main {
-  min-height: calc(100vh - 64px);
+  height: 100%;
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.50)), url(https://main--helix-test--tripodsan.hlx3.page/media_176a84f1e8b1fa349fd54ebf5b0df08e2b110d282.jpeg#width=1891&width=1333);
   background-size: cover;
   background-position: center;
