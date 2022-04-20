@@ -644,3 +644,47 @@ export function isPlatformSupported() {
 export function isDesktop() {
   return !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
+
+export function createCTAButton(label, large = false, quiet = false) {
+  const button = document.createElement('button');
+  button.classList.add('cta-button');
+
+  if (large) {
+    button.classList.add('large');
+  }
+
+  if (quiet) {
+    button.classList.add('quiet');
+  }
+  button.innerHTML = label;
+  return button
+}
+
+export function getLocale() {
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
+  return params.locale ?? 'en-us';
+}
+
+export async function fetchPlaceholders() {
+  if (!window.placeholders) {
+    let json;
+    try {
+      const locale = getLocale();
+      const urlPrefix = locale === 'en-us' ? '' : `/${locale}`;
+      const resp = await fetch(`/locale/${locale}.json`);
+      json = await resp.json();
+    } catch {
+      const resp = await fetch('/locale/en-us.json');
+      json = await resp.json();
+    }
+
+    window.placeholders = {};
+    json.data.forEach((placeholder) => {
+      window.placeholders[toClassName(placeholder.key)] = placeholder.text;
+    });
+  }
+  return window.placeholders;
+}

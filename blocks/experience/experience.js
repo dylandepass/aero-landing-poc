@@ -1,5 +1,5 @@
 
-import { isPlatformSupported, isDesktop } from '../../scripts/scripts.js';
+import { isPlatformSupported, isDesktop, createCTAButton, fetchPlaceholders } from '../../scripts/scripts.js';
 
 /**
  * decorates the experience block
@@ -10,46 +10,41 @@ export default async function decorate(block) {
     get: (searchParams, prop) => searchParams.get(prop),
   });
 
+  const placeholders = await fetchPlaceholders();
+
   const title = block.querySelector('#experience-title');
-  title.innerHTML = params.title ?? 'Untitled';
+  document.title = title.innerHTML = params.title ?? 'Untitled';
 
   title.parentNode.classList.add('experience-title-container');
 
   const createdBy = block.querySelector('#created-by');
-  createdBy.innerHTML = `Created by: ${params.user ?? 'Unknown'}`;
+  createdBy.innerHTML = `${placeholders['created-by']}: ${params.user ?? 'Unknown'}`;
 
   const aeroIcon = document.createElement('img');
   aeroIcon.classList.add('aero-icon');
   aeroIcon.src = '/media_1cde345258ec2322aa4689fa9d44fa0fe0f0f646c.png';
 
   if (isPlatformSupported()) {
-    console.log('Platform is supported');
     block.insertBefore(aeroIcon, block.firstChild);
 
     const launchCTAContainer = document.createElement('div');
     launchCTAContainer.classList.add('launch-cta');
 
     const launchCTALabel = document.createElement('div');
-    launchCTALabel.innerHTML = 'Already have Adobe Aero?';
+    launchCTALabel.innerHTML = placeholders['already-have-aero'];
     launchCTAContainer.append(launchCTALabel);
 
-    const launchCTA = document.createElement('button');
-    launchCTA.classList.add('cta-button');
-    launchCTA.classList.add('quiet');
-    launchCTA.innerHTML = 'Open in Adobe Aero';
-    launchCTAContainer.append(launchCTA);
+    const launchButton = createCTAButton(placeholders['open-in-aero'], false, true);
+    launchCTAContainer.append(launchButton);
 
     block.append(launchCTAContainer);
   } else {
     if (isDesktop()) {
       const unsupportedNoticeContainer = document.createElement('div');
       unsupportedNoticeContainer.classList.add('unsupported-notice');
-      unsupportedNoticeContainer.innerHTML = 'This augmented reality experience requires an iPhone, iPad, or supported Android device.';
+      unsupportedNoticeContainer.innerHTML = placeholders['unsupported-notice'];
 
-      const learnCTA = document.createElement('button');
-      learnCTA.classList.add('cta-button');
-      learnCTA.classList.add('large');
-      learnCTA.innerHTML = 'Learn More';
+      const learnCTA = createCTAButton(placeholders['learn-more'], true, false);
       unsupportedNoticeContainer.append(learnCTA);
 
       block.prepend(unsupportedNoticeContainer);
@@ -62,7 +57,7 @@ export default async function decorate(block) {
 
       const qrLabel = document.createElement('div');
       qrLabel.classList.add('qr-label');
-      qrLabel.innerHTML = 'Scan to view';
+      qrLabel.innerHTML = placeholders['scan-to-view'];
 
       qrCode.appendChild(qrCodeImg);
       qrCode.appendChild(qrLabel);
