@@ -42,7 +42,7 @@ export default async function decorate(block) {
       unsupportedNoticeContainer.classList.add('unsupported-notice');
       unsupportedNoticeContainer.textContent = placeholders['unsupported-notice'];
 
-      const learnCTA = createCTAButton(placeholders['learn-more'], true, false);
+      const learnCTA = createCTAButton(placeholders['learn-more'], true, true);
       unsupportedNoticeContainer.append(learnCTA);
 
       block.prepend(unsupportedNoticeContainer);

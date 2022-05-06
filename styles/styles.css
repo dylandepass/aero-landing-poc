@@ -209,12 +209,14 @@ main img {
   min-height: 32px;
   min-width: 72px;
   padding: 0px 14px;
+  padding-bottom: 3px;
   font-family: var(--body-font-family);
   line-height: 18px;
   transition-delay: 0s, 0s, 0s, 0s;
   transition-duration: 0.13s, 0.13s, 0.13s, 0.13s;
   transition-property: background, border-color, color, box-shadow;
   transition-timing-function: ease-out, ease-out;
+  cursor: pointer;
 }
 
 .cta-button.large {
@@ -223,6 +225,7 @@ main img {
   min-height: 40px;
   min-width: 90px;
   padding: 0px 18px;
+  padding-bottom: 3px;
 }
 
 .cta-button.quiet {
